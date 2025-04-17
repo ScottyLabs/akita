@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: akita
+  security:
+    oauth2:
+      client:
+        provider:
+          ory:
+            issuer-uri: ${AUTH_ISSUER_URI}
+        registration:
+          courses:
+            provider: ory
+            client-id: ${OAUTH_COURSES_ID}
+            client-secret: ${OAUTH_COURSES_SECRET}
+            scope: openid,profile,email,offline_access
+            client-name: courses
+  cloud:
+    gateway:
+      routes:
+        - id: courses
+          uri: ${COURSES_PRIVATE_URL}
+          predicates:
+            - Host=${COURSES_PUBLIC_HOST}
+          filters:
+            - SaveSession
+            - TokenRelay=courses
+            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+
+  data:
+    redis:
+      url: ${REDIS_URL}
