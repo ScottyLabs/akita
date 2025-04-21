@@ -14,6 +14,18 @@ spring:
             client-secret: ${OAUTH_COURSES_SECRET}
             scope: openid,profile,email,offline_access
             client-name: courses
+          o-quest:
+            provider: ory
+            client-id: ${OAUTH_OQUEST_ID}
+            client-secret: ${OAUTH_OQUEST_SECRET}
+            scope: openid,profile,email,offline_access
+            client-name: o-quest
+          maps:
+            provider: ory
+            client-id: ${OAUTH_MAPS_ID}
+            client-secret: ${OAUTH_MAPS_SECRET}
+            scope: openid,profile,email,offline_access
+            client-name: maps
   cloud:
     gateway:
       routes:
@@ -24,6 +36,22 @@ spring:
           filters:
             - SaveSession
             - TokenRelay=courses
+            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+        - id: o-quest
+          uri: ${OQUEST_PRIVATE_URL}
+          predicates:
+            - Host=${OQUEST_PUBLIC_HOST}
+          filters:
+            - SaveSession
+            - TokenRelay=o-quest
+            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+        - id: maps
+          uri: ${MAPS_PRIVATE_URL}
+          predicates:
+            - Host=${MAPS_PUBLIC_HOST}
+          filters:
+            - SaveSession
+            - TokenRelay=maps
             - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
 
   data:
