@@ -82,7 +82,7 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/prod/akita-backend",
+          "awslogs-group": "/ecs/prod/akita",
           "awslogs-region": "us-east-2",
           "awslogs-stream-prefix": "ecs"
         }
