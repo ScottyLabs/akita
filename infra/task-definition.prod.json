@@ -1,0 +1,95 @@
+{
+  "family": "prod-akita-backend",
+  "networkMode": "awsvpc",
+  "executionRoleArn": "arn:aws:iam::340752840444:role/prod-akita-ecs-execution-role",
+  "taskRoleArn": "arn:aws:iam::340752840444:role/prod-akita-ecs-execution-role",
+  "containerDefinitions": [
+    {
+      "name": "akita",
+      "image": "340752840444.dkr.ecr.us-east-2.amazonaws.com/prod/akita:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "SPRING_PROFILES_ACTIVE",
+          "value": "production"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "AUTH_ISSUER_URI",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:340752840444:secret:/prod/akita/config-eRSJFE:AUTH_ISSUER_URI::"
+        },
+        {
+          "name": "OAUTH_COURSES_ID",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:340752840444:secret:/prod/akita/config-eRSJFE:OAUTH_COURSES_ID::"
+        },
+        {
+          "name": "OAUTH_COURSES_SECRET",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:340752840444:secret:/prod/akita/config-eRSJFE:OAUTH_COURSES_SECRET::"
+        },
+        {
+          "name": "OAUTH_MAPS_ID",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:340752840444:secret:/prod/akita/config-eRSJFE:OAUTH_MAPS_ID::"
+        },
+        {
+          "name": "OAUTH_MAPS_SECRET",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:340752840444:secret:/prod/akita/config-eRSJFE:OAUTH_MAPS_SECRET::"
+        },
+        {
+          "name": "OAUTH_OQUEST_ID",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:340752840444:secret:/prod/akita/config-eRSJFE:OAUTH_OQUEST_ID::"
+        },
+        {
+          "name": "OAUTH_OQUEST_SECRET",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:340752840444:secret:/prod/akita/config-eRSJFE:OAUTH_OQUEST_SECRET::"
+        },
+        {
+          "name": "COURSES_PRIVATE_URL",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:340752840444:secret:/prod/akita/config-eRSJFE:COURSES_PRIVATE_URL::"
+        },
+        {
+          "name": "COURSES_PUBLIC_HOST",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:340752840444:secret:/prod/akita/config-eRSJFE:COURSES_PUBLIC_HOST::"
+        },
+        {
+          "name": "OQUEST_PRIVATE_URL",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:340752840444:secret:/prod/akita/config-eRSJFE:OQUEST_PRIVATE_URL::"
+        },
+        {
+          "name": "OQUEST_PUBLIC_HOST",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:340752840444:secret:/prod/akita/config-eRSJFE:OQUEST_PUBLIC_HOST::"
+        },
+        {
+          "name": "MAPS_PRIVATE_URL",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:340752840444:secret:/prod/akita/config-eRSJFE:MAPS_PRIVATE_URL::"
+        },
+        {
+          "name": "MAPS_PUBLIC_HOST",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:340752840444:secret:/prod/akita/config-eRSJFE:MAPS_PUBLIC_HOST::"
+        },
+        {
+          "name": "REDIS_URL",
+          "valueFrom": "arn:aws:secretsmanager:us-east-2:340752840444:secret:/prod/akita/config-eRSJFE:REDIS_URL::"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/prod/akita-backend",
+          "awslogs-region": "us-east-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ],
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024"
+}
