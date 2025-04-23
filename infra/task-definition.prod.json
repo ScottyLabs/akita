@@ -1,5 +1,5 @@
 {
-  "family": "prod-akita-backend",
+  "family": "prod-akita",
   "networkMode": "awsvpc",
   "executionRoleArn": "arn:aws:iam::340752840444:role/prod-akita-ecs-execution-role",
   "taskRoleArn": "arn:aws:iam::340752840444:role/prod-akita-ecs-execution-role",
