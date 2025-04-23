@@ -29,7 +29,7 @@ ENV SPRING_PROFILES_ACTIVE=prod
 ENV JAVA_OPTS=""
 
 # Copy the built JAR from the build stage
-COPY --from=build /workspace/app/akita/build/libs/akita-*.jar /app/akita.jar
+COPY --from=build /workspace/app/build/libs/akita-*.jar /app/akita.jar
 
 # Set ownership to the non-root user
 RUN chown -R akita:akita /app
