@@ -5,23 +5,23 @@ spring:
     oauth2:
       client:
         provider:
-          ory:
+          authentik:
             issuer-uri: ${AUTH_ISSUER_URI}
         registration:
           courses:
-            provider: ory
+            provider: authentik
             client-id: ${OAUTH_COURSES_ID}
             client-secret: ${OAUTH_COURSES_SECRET}
             scope: openid,profile,email,offline_access
             client-name: courses
           o-quest:
-            provider: ory
+            provider: authentik
             client-id: ${OAUTH_OQUEST_ID}
             client-secret: ${OAUTH_OQUEST_SECRET}
             scope: openid,profile,email,offline_access
             client-name: o-quest
           maps:
-            provider: ory
+            provider: authentik
             client-id: ${OAUTH_MAPS_ID}
             client-secret: ${OAUTH_MAPS_SECRET}
             scope: openid,profile,email,offline_access
