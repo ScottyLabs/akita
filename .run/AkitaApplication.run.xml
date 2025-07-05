@@ -1,0 +1,26 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="AkitaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <option name="ACTIVE_PROFILES" value="dev" />
+    <envs>
+      <env name="AUTH_ISSUER_URI" value="https://auth.scottylabs.org" />
+      <env name="COURSES_PRIVATE_URL" value="https://example.com" />
+      <env name="COURSES_PUBLIC_HOST" value="localhost:8080" />
+      <env name="OAUTH_COURSES_ID" value="010b3b0e-56be-4788-b633-216cd5357752" />
+      <env name="OAUTH_COURSES_SECRET" value="fqgX0XUxVc9DI9iTKuZLasoCp" />
+      <env name="MAPS_PRIVATE_URL" value="https://example.com" />
+      <env name="MAPS_PUBLIC_HOST" value="localhost:8080" />
+      <env name="OAUTH_MAPS_ID" value="010b3b0e-56be-4788-b633-216cd5357752" />
+      <env name="OAUTH_MAPS_SECRET" value="fqgX0XUxVc9DI9iTKuZLasoCp" />
+      <env name="OQUEST_PRIVATE_URL" value="https://example.com" />
+      <env name="OQUEST_PUBLIC_HOST" value="localhost:8080" />
+      <env name="OAUTH_OQUEST_ID" value="010b3b0e-56be-4788-b633-216cd5357752" />
+      <env name="OAUTH_OQUEST_SECRET" value="fqgX0XUxVc9DI9iTKuZLasoCp" />
+      <env name="REDIS_URL" value="redis://localhost:6379" />
+    </envs>
+    <module name="akita.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="org.scottylabs.akita.AkitaApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
