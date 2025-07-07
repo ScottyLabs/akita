@@ -1,5 +1,6 @@
 package org.scottylabs.akita.config
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
@@ -11,7 +12,9 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource
 
 @Configuration
 @EnableWebFluxSecurity
-class SecurityConfig {
+class SecurityConfig(
+    @Value("\${app.auth.allowed-origins}") val origins: String,
+) {
     @Bean
     fun securityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
         http.formLogin { it.disable() }
@@ -20,6 +23,8 @@ class SecurityConfig {
 
         http.csrf{ it.disable() }
 
+        http.cors { it.configurationSource(corsConfigurationSource()) }
+
         return http.build()
     }
 
@@ -27,7 +32,7 @@ class SecurityConfig {
     fun corsConfigurationSource(): CorsConfigurationSource {
         val configuration = CorsConfiguration()
 
-        configuration.allowedOrigins = listOf("*")
+        configuration.allowedOrigins = origins.split(",")
         configuration.allowedMethods = listOf("*")
         configuration.allowedHeaders = listOf("*")
         configuration.exposedHeaders = listOf("*")

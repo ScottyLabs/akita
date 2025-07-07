@@ -1,3 +1,8 @@
+app:
+  auth:
+    issuer-uri: ${AUTH_ISSUER_URI}
+    allowed-origins: ${ALLOWED_ORIGINS}
+
 spring:
   application:
     name: akita
@@ -6,7 +11,7 @@ spring:
       client:
         provider:
           authentik:
-            issuer-uri: ${AUTH_ISSUER_URI}
+            issuer-uri: ${app.auth.issuer-uri}
         registration:
           courses:
             provider: authentik
