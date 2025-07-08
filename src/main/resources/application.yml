@@ -1,6 +1,5 @@
 app:
   auth:
-    issuer-uri: ${AUTH_ISSUER_URI}
     allowed-origins: ${ALLOWED_ORIGINS}
 
 spring:
@@ -10,23 +9,27 @@ spring:
     oauth2:
       client:
         provider:
-          authentik:
-            issuer-uri: ${app.auth.issuer-uri}
+          courses:
+            issuer-uri: ${COURSES_ISSUER_URI}
+          o-quest:
+            issuer-uri: ${OQUEST_ISSUER_URI}
+          maps:
+            issuer-uri: ${MAPS_ISSUER_URI}
         registration:
           courses:
-            provider: authentik
+            provider: courses
             client-id: ${OAUTH_COURSES_ID}
             client-secret: ${OAUTH_COURSES_SECRET}
             scope: openid,profile,email,offline_access
             client-name: courses
           o-quest:
-            provider: authentik
+            provider: o-quest
             client-id: ${OAUTH_OQUEST_ID}
             client-secret: ${OAUTH_OQUEST_SECRET}
             scope: openid,profile,email,offline_access
             client-name: o-quest
           maps:
-            provider: authentik
+            provider: maps
             client-id: ${OAUTH_MAPS_ID}
             client-secret: ${OAUTH_MAPS_SECRET}
             scope: openid,profile,email,offline_access
