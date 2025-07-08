@@ -12,8 +12,6 @@ import org.springframework.security.oauth2.client.web.server.ServerOAuth2Authori
 import org.springframework.security.oauth2.client.web.server.ServerOAuth2AuthorizedClientRepository
 import org.springframework.security.oauth2.client.web.server.WebSessionServerOAuth2AuthorizedClientRepository
 import org.springframework.security.web.server.SecurityWebFilterChain
-import org.springframework.security.web.server.authentication.RegisterSessionServerAuthenticationSuccessHandler
-import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler
 import org.springframework.security.web.server.authentication.logout.SecurityContextServerLogoutHandler
 import org.springframework.security.web.server.authentication.logout.ServerLogoutHandler
 import org.springframework.security.web.server.authentication.logout.ServerLogoutSuccessHandler
@@ -54,6 +52,15 @@ class SecurityConfig(
     @Bean
     fun securityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
         http.formLogin { it.disable() }
+
+        http.oauth2Login {
+            it.authorizationRequestResolver(authorizationRequestResolver())
+        }
+
+        http.logout {
+            it.logoutSuccessHandler(serverLogoutSuccessHandler())
+            it.logoutHandler(serverLogoutHandler())
+        }
 
         http.authorizeExchange { it.anyExchange().permitAll() }
 
