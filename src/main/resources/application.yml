@@ -54,6 +54,7 @@ spring:
           uri: ${MAPS_PRIVATE_URL}
           predicates:
             - Host=${MAPS_PUBLIC_HOST}
+            - Path=/api/**
           filters:
             - SaveSession
             - TokenRelay=maps
