@@ -65,9 +65,3 @@ spring:
   data:
     redis:
       url: ${REDIS_URL}
-
-logging:
-  level:
-    org:
-      springframework:
-        security: DEBUG
