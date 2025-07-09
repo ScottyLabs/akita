@@ -1,5 +1,7 @@
 package org.scottylabs.akita.config
 
+import org.scottylabs.akita.security.SlabsServerAuthenticationSuccessHandler
+import org.scottylabs.akita.security.SlabsServerOauth2AuthorizationRequestResolver
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -12,6 +14,7 @@ import org.springframework.security.oauth2.client.web.server.ServerOAuth2Authori
 import org.springframework.security.oauth2.client.web.server.ServerOAuth2AuthorizedClientRepository
 import org.springframework.security.oauth2.client.web.server.WebSessionServerOAuth2AuthorizedClientRepository
 import org.springframework.security.web.server.SecurityWebFilterChain
+import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler
 import org.springframework.security.web.server.authentication.logout.SecurityContextServerLogoutHandler
 import org.springframework.security.web.server.authentication.logout.ServerLogoutHandler
 import org.springframework.security.web.server.authentication.logout.ServerLogoutSuccessHandler
@@ -30,13 +33,14 @@ class SecurityConfig(
         return WebSessionServerOAuth2AuthorizedClientRepository()
     }
 
-//    @Bean
-//    fun authenticationSuccessHandler(): ServerAuthenticationSuccessHandler {
-//    }
+    @Bean
+    fun authenticationSuccessHandler(): ServerAuthenticationSuccessHandler {
+        return SlabsServerAuthenticationSuccessHandler()
+    }
 
     @Bean
     fun authorizationRequestResolver(): ServerOAuth2AuthorizationRequestResolver {
-        return DefaultServerOAuth2AuthorizationRequestResolver(clientRegistrationRepository)
+        return SlabsServerOauth2AuthorizationRequestResolver(clientRegistrationRepository)
     }
 
     @Bean
@@ -55,6 +59,7 @@ class SecurityConfig(
 
         http.oauth2Login {
             it.authorizationRequestResolver(authorizationRequestResolver())
+            it.authenticationSuccessHandler(authenticationSuccessHandler())
         }
 
         http.logout {
