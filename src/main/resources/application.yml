@@ -11,8 +11,8 @@ spring:
         provider:
           courses:
             issuer-uri: ${COURSES_ISSUER_URI}
-          o-quest:
-            issuer-uri: ${OQUEST_ISSUER_URI}
+          quest:
+            issuer-uri: ${QUEST_ISSUER_URI}
           maps:
             issuer-uri: ${MAPS_ISSUER_URI}
         registration:
@@ -22,12 +22,12 @@ spring:
             client-secret: ${OAUTH_COURSES_SECRET}
             scope: openid,profile,email,offline_access
             client-name: courses
-          o-quest:
-            provider: o-quest
-            client-id: ${OAUTH_OQUEST_ID}
-            client-secret: ${OAUTH_OQUEST_SECRET}
+          quest:
+            provider: quest
+            client-id: ${OAUTH_QUEST_ID}
+            client-secret: ${OAUTH_QUEST_SECRET}
             scope: openid,profile,email,offline_access
-            client-name: o-quest
+            client-name: quest
           maps:
             provider: maps
             client-id: ${OAUTH_MAPS_ID}
@@ -45,13 +45,13 @@ spring:
             - SaveSession
             - TokenRelay=courses
             - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
-        - id: o-quest
-          uri: ${OQUEST_PRIVATE_URL}
+        - id: quest
+          uri: ${QUEST_PRIVATE_URL}
           predicates:
-            - Host=${OQUEST_PUBLIC_HOST}
+            - Host=${QUEST_PUBLIC_HOST}
           filters:
             - SaveSession
-            - TokenRelay=o-quest
+            - TokenRelay=quest
             - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
         - id: maps
           uri: ${MAPS_PRIVATE_URL}
