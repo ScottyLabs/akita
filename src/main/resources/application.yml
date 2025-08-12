@@ -65,3 +65,17 @@ spring:
   data:
     redis:
       url: ${REDIS_URL}
+  
+  session:
+    store-type: redis
+    redis:
+      flush-mode: on_save
+      namespace: "spring:session"
+    timeout: 365d
+    cookie:
+      name: SESSION
+      max-age: 31536000
+      http-only: true
+      secure: true
+      same-site: none
+      
