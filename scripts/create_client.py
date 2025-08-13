@@ -2,7 +2,7 @@ import requests
 from dotenv import load_dotenv, find_dotenv
 import os
 
-name = input("Enter the name of the application: ")
+name = input("Enter the name of the application (PascalCase): ")
 
 
 def get_all_flows(url, token):
