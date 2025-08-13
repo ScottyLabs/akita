@@ -38,3 +38,9 @@ out/
 
 ### Kotlin ###
 .kotlin
+
+### Environment Variables ###
+.env*
+
+### MacOS ###
+.DS_Store
