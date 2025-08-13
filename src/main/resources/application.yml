@@ -15,6 +15,8 @@ spring:
             issuer-uri: ${QUEST_ISSUER_URI}
           maps:
             issuer-uri: ${MAPS_ISSUER_URI}
+          rustmaps:
+            issuer-uri: ${RUSTMAPS_ISSUER_URI}
         registration:
           courses:
             provider: courses
@@ -34,6 +36,12 @@ spring:
             client-secret: ${OAUTH_MAPS_SECRET}
             scope: openid,profile,email,offline_access
             client-name: maps
+          rustmaps:
+            provider: rustmaps
+            client-id: ${OAUTH_RUSTMAPS_ID}
+            client-secret: ${OAUTH_RUSTMAPS_SECRET}
+            scope: openid,profile,email,offline_access
+            client-name: rustmaps
   cloud:
     gateway:
       routes:
@@ -60,6 +68,14 @@ spring:
           filters:
             - SaveSession
             - TokenRelay=maps
+            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+        - id: rustmaps
+          uri: ${RUSTMAPS_PRIVATE_URL}
+          predicates:
+            - Host=${RUSTMAPS_PUBLIC_HOST}
+          filters:
+            - SaveSession
+            - TokenRelay=rustmaps
             - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
 
   data:
