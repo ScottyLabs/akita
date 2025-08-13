@@ -8,7 +8,7 @@ export VAULT_ADDR=https://secrets.scottylabs.org
 usage() {
   echo
   echo -e "\tUsage: $0 ENVIRONMENT --push | --pull\n"
-  echo -e "\t\tENVIRONMENT: The environment to operate on, one of dev | staging | prod | all\n"
+  echo -e "\t\tENVIRONMENT: The environment to operate on, one of local | dev | staging | prod | all\n"
   echo -e "\t\t--push    Push environment variables to Vault"
   echo -e "\t\t--pull    Pull environment variables from Vault\n"
   echo -e "\tOptions:"
@@ -62,10 +62,10 @@ fi
 
 # Sanitizing the Environment argument
 if [ "$ENVIRONMENT" == "all" ]; then
-  ENVIRONMENT=("dev" "staging" "prod")
+  ENVIRONMENT=("local" "dev" "staging" "prod")
 else
   case "$ENVIRONMENT" in
-  "dev" | "staging" | "prod")
+  "local" | "dev" | "staging" | "prod")
     ENVIRONMENT=("$ENVIRONMENT")
     ;;
   *)
